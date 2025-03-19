@@ -1,0 +1,38 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: kube-prom-push
+  namespace: monitoring
+  labels:
+    app: kube-prom-push
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: kube-prom-push
+  template:
+    metadata:
+      labels:
+        app: kube-prom-push
+    spec:
+      serviceAccountName: pod-lister-sa
+      containers:
+      - name: kube-prom-push
+        image: ghcr.io/chudump/kubeprompush:latest
+        ports:
+        - containerPort: 8080
+        resources:
+          requests:
+            memory: "256Mi"
+            cpu: "500m"
+          limits:
+            memory: "1024Mi"
+            cpu: "1"
+        volumeMounts:
+        - name: config-volume
+          mountPath: /app/config.yaml
+          subPath: config.yaml
+      volumes:
+      - name: config-volume
+        configMap:
+          name: kube-prom-push-config
