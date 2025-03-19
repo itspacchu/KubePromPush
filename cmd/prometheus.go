@@ -52,7 +52,7 @@ func SendMetrics(config Config, r io.ReadCloser, unique string) {
 		return
 	}
 
-	pusher := push.New(config.Endpoint, "itspacchu-metrics").
+	pusher := push.New(config.Endpoint, config.PushGateway.Project).
 		Grouping("instance", unique).
 		BasicAuth(config.Authentication.Username, config.Authentication.Password)
 
