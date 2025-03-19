@@ -1,0 +1,9 @@
+node-exporter:
+  namespace: "monitoring"
+  scrape-every: 15
+push-gateway:
+  endpoint: "http://xxx:xxx"
+  project: "none"
+  auth:
+    username: "none"
+    password: "none"
