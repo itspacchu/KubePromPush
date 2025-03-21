@@ -7,7 +7,7 @@ import (
 )
 
 const info string = `
-	Maintainer	: prashant.nandipati@zigram.tech
+	Maintainer	: itspacchu
 	Version		: v0.1b
 `
 
